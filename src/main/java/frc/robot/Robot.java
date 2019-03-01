@@ -48,8 +48,8 @@ public class Robot extends IterativeRobot {
 
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
-    inputChooser.setDefaultOption("Joysticks", InputType.JOYSTICKS);
-    inputChooser.addOption("Controller", InputType.CONTROLLER);
+    inputChooser.addOption("Joysticks", InputType.JOYSTICKS);
+    inputChooser.setDefaultOption("Controller", InputType.CONTROLLER);
     SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putData("Input type", inputChooser);
   }
@@ -124,8 +124,8 @@ public class Robot extends IterativeRobot {
     }
   }
 
-  private static final double DEADZONE = 0.1;
-  private static final double ACCELERATION = 1;
+  private static final double DEADZONE = 0.05;
+  private static final double ACCELERATION = 0.7;
 
   private void arcade(double desiredMove, double desiredTurn) {
     double moveSpeed = 0;
@@ -141,7 +141,7 @@ public class Robot extends IterativeRobot {
       turnSpeed = desiredTurn;
     }
 
-    turnSpeed += (desiredTurn - turnSpeed) * ACCELERATION;
+    turnSpeed += (desiredTurn - turnSpeed) * ACCELERATION * 0.7;
     moveSpeed += (desiredMove - moveSpeed) * ACCELERATION;
 
     if (Math.abs(moveSpeed) > DEADZONE) {
